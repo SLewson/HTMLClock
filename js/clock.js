@@ -8,5 +8,3 @@ function getTime() {
 function setTime(time) {
   document.getElementById("clock").innerHTML = time;
 }
-
-getTime();
