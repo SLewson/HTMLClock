@@ -1,0 +1,23 @@
+body {
+  background-color: #0000FF;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+p {
+  font-style: normal;
+  font-size: 20px;
+}
+
+.mTitle {
+  color: #FFFFFF;
+  font-weight:500;
+  text-align: center;
+}
+
+.mClock {
+  color: #FFFFFF;
+  font-weight:500;
+  font-size: 100px;
+  text-align: center;
+}
