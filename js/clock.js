@@ -19,10 +19,25 @@ function getTemp() {
      success: function( json ) {
          var forecastText = json.daily.summary
          var forecastGraphic = "img/" + json.daily.icon + ".png"
+         var tempMax = json.daily.data[0].temperatureMax
          $("#forecastLabel").append(forecastText)
          $("#forecastIcon").attr("src", forecastGraphic)
-         //document.getElementById("forecastLabel").src = forecastGraphic
 
+         if (tempMax < 60) {
+           $("body").attr("class", "cold")
+         }
+         else if (tempMax >= 60) {
+           $("body").attr("class", "chilly")
+         }
+         else if (tempMax >= 70) {
+           $("body").attr("class", "nice")
+         }
+         else if (tempMax >= 80) {
+           $("body").attr("class", "warm")
+         }
+         else if (tempMax >= 90) {
+           $("body").attr("class", "hot")
+         }
      },
      // request fails; the raw request and status codes are passed to the function
      error: function( xhr, status, errorThrown ) {
