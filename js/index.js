@@ -1,3 +1,5 @@
+var myAlarms;
+
 function showAlarmPopup() {
   $("#mask").removeClass("hide");
   $("#popup").removeClass("hide");
@@ -8,7 +10,8 @@ function hideAlarmPopup() {
   $("#popup").addClass("hide");
 }
 
-function insertAlarm(hours, mins, ampm, alarmName) {
+function insertAlarm(hours, mins, ampm, alarmName, parseid) {
+  console.log("Got id: " + parseid);
   var mdiv = $("<div>");
   mdiv.addClass("flexible");
 
@@ -22,6 +25,16 @@ function insertAlarm(hours, mins, ampm, alarmName) {
   timeDiv.html(hours + ":" + mins + ampm);
   mdiv.append(timeDiv);
 
+  var delButton = $("<input>");
+  delButton.attr("type", "button");
+  delButton.attr("value","Delete");
+  delButton.attr("class", "button");
+  delButton.attr("greeting", "yo");
+  delButton.attr("parseid", parseid);
+  delButton.click(function() { deleteAlarm($(this))});
+  //delButton.attr("onclick", "javascript:deleteAlarm(this);")
+  mdiv.append(delButton);
+
   $("#alarms").append(mdiv);
 }
 
@@ -31,15 +44,37 @@ function addAlarm() {
   var ampm = $("#ampm option:selected").text();
   var alarmName = $("#alarmName").val();
 
-
   var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
       success: function(object) {
-        insertAlarm(hours, mins, ampm, alarmName);
+
+        insertAlarm(hours, mins, ampm, alarmName, object.id);
         hideAlarmPopup();
+        myAlarms.add(alarmObject);
       }
     });
+}
+
+function deleteAlarm(alarm) {
+  //console.log("hi");
+
+
+  var query = new Parse.Query(Comment);
+  query.equalTo("objectId", alarm.attr("parseid"));
+  query.find({
+    success: function(alarm) {
+      alarm.destory({
+        success: function(alarmToDelete) {
+          var container = alarm.parent().remove();
+        },
+        error: function(alarmToDelete, error) {
+          console.log("Parse delete error")
+        }
+      });
+    }
+  });
+  //console.log(alarm.attr("parseid"));
 }
 
 function getAllAlarms() {
@@ -48,8 +83,11 @@ function getAllAlarms() {
   var query = new Parse.Query(AlarmObject);
    query.find({
        success: function(results) {
+         myAlarms = results;
          for (var i = 0; i < results.length; i++) {
-           insertAlarm(results[i].get("time"), results[i].get("alarmName"));
+           console.log("id? " + results[i].get("id"));
+           console.log("hours? " + results[i].get("hours"));
+           insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
          }
        }
    });
