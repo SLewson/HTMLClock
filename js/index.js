@@ -30,9 +30,29 @@ function addAlarm() {
   var mins = $("#mins option:selected").text();
   var ampm = $("#ampm option:selected").text();
   var alarmName = $("#alarmName").val();
-  insertAlarm(hours, mins, ampm, alarmName);
 
-  hideAlarmPopup();
+
+  var AlarmObject = Parse.Object.extend("Alarm");
+    var alarmObject = new AlarmObject();
+      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      success: function(object) {
+        insertAlarm(hours, mins, ampm, alarmName);
+        hideAlarmPopup();
+      }
+    });
+}
+
+function getAllAlarms() {
+  Parse.initialize("NVAaIXJYQhMvAWUdwqtOhICNXPzNhx265Ke8dYME", "wscbaeetwwXMFgIo9CoYstdB2JNNShA9RVCis3Xd");
+  var AlarmObject = Parse.Object.extend("Alarm");
+  var query = new Parse.Query(AlarmObject);
+   query.find({
+       success: function(results) {
+         for (var i = 0; i < results.length; i++) {
+           insertAlarm(results[i].get("time"), results[i].get("alarmName"));
+         }
+       }
+   });
 }
 
 function getTime() {
@@ -86,4 +106,5 @@ function getTemp() {
 $(document).ready(function() {
   getTime()
   getTemp()
+  getAllAlarms()
 });
