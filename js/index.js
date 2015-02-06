@@ -60,18 +60,20 @@ function deleteAlarm(alarm) {
   //console.log("hi");
 
 
-  var query = new Parse.Query(Comment);
+  var query = new Parse.Query("Alarm");
   query.equalTo("objectId", alarm.attr("parseid"));
   query.find({
-    success: function(alarm) {
-      alarm.destory({
-        success: function(alarmToDelete) {
-          var container = alarm.parent().remove();
-        },
-        error: function(alarmToDelete, error) {
-          console.log("Parse delete error")
-        }
-      });
+    success: function(alarms) {
+      for (var i = 0; i < alarms.length; i++) {
+          alarms[i].destroy({
+          success: function(alarmToDelete) {
+            alarm.parent().remove();
+          },
+          error: function(alarmToDelete, error) {
+            console.log("Parse delete error")
+          }
+        });
+      }
     }
   });
   //console.log(alarm.attr("parseid"));
