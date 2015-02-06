@@ -1,3 +1,40 @@
+function showAlarmPopup() {
+  $("#mask").removeClass("hide");
+  $("#popup").removeClass("hide");
+}
+
+function hideAlarmPopup() {
+  $("#mask").addClass("hide");
+  $("#popup").addClass("hide");
+}
+
+function insertAlarm(hours, mins, ampm, alarmName) {
+  var mdiv = $("<div>");
+  mdiv.addClass("flexible");
+
+  var nameDiv = $("<div>");
+  nameDiv.attr("class", "name")
+  nameDiv.html(alarmName);
+  mdiv.append(nameDiv);
+
+  var timeDiv = $("<div>");
+  timeDiv.attr("class", "time")
+  timeDiv.html(hours + ":" + mins + ampm);
+  mdiv.append(timeDiv);
+
+  $("#alarms").append(mdiv);
+}
+
+function addAlarm() {
+  var hours = $("#hours option:selected").text();
+  var mins = $("#mins option:selected").text();
+  var ampm = $("#ampm option:selected").text();
+  var alarmName = $("#alarmName").val();
+  insertAlarm(hours, mins, ampm, alarmName);
+
+  hideAlarmPopup();
+}
+
 function getTime() {
   var date = new Date();
   var time = date.toLocaleTimeString();
@@ -47,5 +84,6 @@ function getTemp() {
 }
 
 $(document).ready(function() {
+  getTime()
   getTemp()
 });
