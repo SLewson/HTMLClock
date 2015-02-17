@@ -57,9 +57,6 @@ function addAlarm() {
 }
 
 function deleteAlarm(alarm) {
-  //console.log("hi");
-
-
   var query = new Parse.Query("Alarm");
   query.equalTo("objectId", alarm.attr("parseid"));
   query.find({
@@ -76,7 +73,6 @@ function deleteAlarm(alarm) {
       }
     }
   });
-  //console.log(alarm.attr("parseid"));
 }
 
 function getAllAlarms() {
