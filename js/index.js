@@ -15,10 +15,14 @@ function setupFacebook() {
         document.getElementById("fbbutton").style.display = 'none';
         getUserName()
       }
+      else {
+        console.log("not logged in");
+      }
     });
   };
 
   (function(d, s, id){
+    console.log("facebook's callback?");
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
