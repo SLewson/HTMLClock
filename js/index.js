@@ -128,9 +128,10 @@ function getAllAlarms() {
   Parse.initialize("NVAaIXJYQhMvAWUdwqtOhICNXPzNhx265Ke8dYME", "wscbaeetwwXMFgIo9CoYstdB2JNNShA9RVCis3Xd");
   var AlarmObject = Parse.Object.extend("Alarm");
   var query = new Parse.Query(AlarmObject);
-  query.equalTo("userId", userId);
+  //query.equalTo("userId", userId);
    query.find({
        success: function(results) {
+         console.log("return success");
          myAlarms = results;
          for (var i = 0; i < results.length; i++) {
            console.log("id? " + results[i].get("id"));
