@@ -1,5 +1,5 @@
 var myAlarms;
-var userName;
+var userId;
 
 function setupFacebook() {
   window.fbAsyncInit = function() {
@@ -33,9 +33,9 @@ function setupFacebook() {
 function getUserName() {
   console.log("get username")
   FB.api('/me', function(response) {
-    alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
-    console.log("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id)
-    var img_link = "http://graph.facebook.com/"+response.id+"/picture"
+    console.log("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
+    userId = response.id;
+    var img_link = "http://graph.facebook.com/"+response.id+"/picture";
   });
 }
 
@@ -85,7 +85,7 @@ function addAlarm() {
 
   var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "userid", userId}, {
       success: function(object) {
 
         insertAlarm(hours, mins, ampm, alarmName, object.id);
@@ -118,6 +118,7 @@ function getAllAlarms() {
   Parse.initialize("NVAaIXJYQhMvAWUdwqtOhICNXPzNhx265Ke8dYME", "wscbaeetwwXMFgIo9CoYstdB2JNNShA9RVCis3Xd");
   var AlarmObject = Parse.Object.extend("Alarm");
   var query = new Parse.Query(AlarmObject);
+  query.equalTo("userId", userId);
    query.find({
        success: function(results) {
          myAlarms = results;
