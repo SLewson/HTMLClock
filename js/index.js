@@ -15,9 +15,6 @@ function setupFacebook() {
         document.getElementById("fbbutton").style.display = 'none';
         getUserName()
       }
-      else {
-        FB.login();
-      }
     });
   };
 
@@ -36,7 +33,7 @@ function getUserName() {
     console.log("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
     userId = response.id;
     console.log("setting title maybe")
-    document.getElementById("titleheader").innerHTML = response.name + "'s Alarm Clock'";
+    document.getElementById("titleheader").innerHTML = response.name + "'s Alarm Clock";
     var img_link = "http://graph.facebook.com/"+response.id+"/picture";
     getAllAlarms();
   });
@@ -118,6 +115,7 @@ function deleteAlarm(alarm) {
 }
 
 function getAllAlarms() {
+  console.log("getting alarms");
   Parse.initialize("NVAaIXJYQhMvAWUdwqtOhICNXPzNhx265Ke8dYME", "wscbaeetwwXMFgIo9CoYstdB2JNNShA9RVCis3Xd");
   var AlarmObject = Parse.Object.extend("Alarm");
   var query = new Parse.Query(AlarmObject);
