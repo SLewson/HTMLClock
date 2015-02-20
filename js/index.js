@@ -14,7 +14,6 @@ function setupFacebook() {
         console.log('Logged in.');
         document.getElementById("fbbutton").style.display = 'none';
         getUserName()
-        getAllAlarms()
       }
       else {
         FB.login();
@@ -39,6 +38,7 @@ function getUserName() {
     console.log("setting title maybe")
     document.getElementById("titleheader").innerHTML = response.name + "'s Alarm Clock'";
     var img_link = "http://graph.facebook.com/"+response.id+"/picture";
+    getAllAlarms();
   });
 }
 
