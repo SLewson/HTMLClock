@@ -35,6 +35,7 @@ function getUserName() {
   FB.api('/me', function(response) {
     console.log("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
     userId = response.id;
+    $("#titleheader").innerHtml(response.name);
     var img_link = "http://graph.facebook.com/"+response.id+"/picture";
   });
 }
