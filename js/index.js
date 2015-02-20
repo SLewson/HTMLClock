@@ -88,7 +88,7 @@ function addAlarm() {
       alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "userid": userId}, {
       success: function(object) {
 
-        insertAlarm(hours, mins, ampm, alarmName, object.id, userId);
+        insertAlarm(hours, mins, ampm, alarmName, object.id);
         hideAlarmPopup();
         myAlarms.add(alarmObject);
       }
@@ -125,7 +125,7 @@ function getAllAlarms() {
          for (var i = 0; i < results.length; i++) {
            console.log("id? " + results[i].get("id"));
            console.log("hours? " + results[i].get("hours"));
-           insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id, userId);
+           insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
          }
        }
    });
