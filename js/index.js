@@ -88,7 +88,7 @@ function addAlarm() {
       alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "userid": userId}, {
       success: function(object) {
 
-        insertAlarm(hours, mins, ampm, alarmName, object.id);
+        insertAlarm(hours, mins, ampm, alarmName, object.id, userId);
         hideAlarmPopup();
         myAlarms.add(alarmObject);
       }
