@@ -12,7 +12,7 @@ function setupFacebook() {
       console.log("getLoginStatus")
       if (response.status === 'connected') {
         console.log('Logged in.');
-        getUserName() 
+        getUserName()
         getAllAlarms()
       }
       else {
@@ -31,8 +31,10 @@ function setupFacebook() {
 }
 
 function getUserName() {
+  console.log("get username")
   FB.api('/me', function(response) {
     alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
+    console.log("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id)
     var img_link = "http://graph.facebook.com/"+response.id+"/picture"
   });
 }
