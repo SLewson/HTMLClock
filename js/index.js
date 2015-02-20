@@ -12,8 +12,8 @@ function setupFacebook() {
       console.log("getLoginStatus")
       if (response.status === 'connected') {
         console.log('Logged in.');
-        document.getElementById("fbbutton").style.display = 'none';
-        getUserName()
+        //document.getElementById("fbbutton").style.display = 'none';
+        //getUserName()
       }
       else {
         console.log("not logged in");
@@ -22,7 +22,6 @@ function setupFacebook() {
   };
 
   (function(d, s, id){
-    console.log("facebook's callback?");
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
@@ -41,6 +40,12 @@ function getUserName() {
     var img_link = "http://graph.facebook.com/"+response.id+"/picture";
     getAllAlarms();
   });
+}
+
+function facebookLoginCallback() {
+  console.log('Logged in.callback.');
+  document.getElementById("fbbutton").style.display = 'none';
+  getUserName()
 }
 
 function showAlarmPopup() {
