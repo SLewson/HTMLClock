@@ -14,6 +14,7 @@ function setupFacebook() {
         console.log('Logged in.');
         //document.getElementById("fbbutton").style.display = 'none';
         //getUserName()
+        facebookLoginCallback();
       }
       else {
         console.log("not logged in");
