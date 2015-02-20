@@ -125,7 +125,7 @@ function getAllAlarms() {
          for (var i = 0; i < results.length; i++) {
            console.log("id? " + results[i].get("id"));
            console.log("hours? " + results[i].get("hours"));
-           insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
+           insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id, userId);
          }
        }
    });
@@ -180,6 +180,7 @@ function getTemp() {
 }
 
 $(document).ready(function() {
+  myAlarms = [];
   setupFacebook()
   getTime()
   getTemp()
