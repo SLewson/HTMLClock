@@ -90,7 +90,7 @@ function addAlarm() {
 
         insertAlarm(hours, mins, ampm, alarmName, object.id);
         hideAlarmPopup();
-        myAlarms.add(alarmObject);
+        myAlarms.push(alarmObject);
       }
     });
 }
