@@ -12,6 +12,7 @@ function setupFacebook() {
       console.log("getLoginStatus")
       if (response.status === 'connected') {
         console.log('Logged in.');
+        document.getElementById("fbbutton").style.display = 'none';
         getUserName()
         getAllAlarms()
       }
