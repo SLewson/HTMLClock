@@ -1,4 +1,5 @@
 var myAlarms;
+var userName;
 
 function setupFacebook() {
   window.fbAsyncInit = function() {
@@ -26,6 +27,13 @@ function setupFacebook() {
      js.src = "http://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+}
+
+function getUserName() {
+  FB.api('/me', function(response) {
+    alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
+    var img_link = "http://graph.facebook.com/"+response.id+"/picture"
+  });
 }
 
 function showAlarmPopup() {
