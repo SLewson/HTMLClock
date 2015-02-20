@@ -128,7 +128,8 @@ function getAllAlarms() {
   Parse.initialize("NVAaIXJYQhMvAWUdwqtOhICNXPzNhx265Ke8dYME", "wscbaeetwwXMFgIo9CoYstdB2JNNShA9RVCis3Xd");
   var AlarmObject = Parse.Object.extend("Alarm");
   var query = new Parse.Query(AlarmObject);
-  //query.equalTo("userId", userId);
+  console.log("looking for alarms with user id: " + userId)
+  query.equalTo("userId", userId);
    query.find({
        success: function(results) {
          console.log("return success");
@@ -136,6 +137,7 @@ function getAllAlarms() {
          for (var i = 0; i < results.length; i++) {
            console.log("id? " + results[i].get("id"));
            console.log("hours? " + results[i].get("hours"));
+           console.log("")
            insertAlarm(results[i].get("hours"), results[i].get("mins"), results[i].get("ampm"), results[i].get("alarmName"), results[i].id);
          }
        }
