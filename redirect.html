@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script>
+    window.onload = function() {
+      console.log("redirect on load");
+      if(window.location.hash) {
+        redirect_init(window.location.hash);
+      }
+    };
+  </script>
+</body>
+</html>
