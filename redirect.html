@@ -15,7 +15,7 @@
       if(window.location.hash) {
         console.log("window.location.hash");
         window.opener.inOpener();
-        redirect_init(window.location.hash);
+        window.opener.redirect_init(window.location.hash);
         window.close();
       }
     };
