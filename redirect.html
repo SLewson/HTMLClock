@@ -13,8 +13,11 @@
     window.onload = function() {
       if(window.location.hash) {
         redirect_init(window.location.hash);
-        window.close();
       }
+      else {
+        window.opener.console.log("Error: no redirect hash");
+      }
+      window.close();
     };
   </script>
 </body>
