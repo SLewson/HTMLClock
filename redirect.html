@@ -11,10 +11,7 @@
   <script src="lib/oauth.js" type="text/javascript"></script>
   <script>
     window.onload = function() {
-      console.log("redirect on load");
       if(window.location.hash) {
-        console.log("window.location.hash");
-        window.opener.inOpener();
         window.opener.redirect_init(window.location.hash);
         window.close();
       }
